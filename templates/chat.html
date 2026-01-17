@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Python Real-Time Chat</title>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+</head>
+<body>
+    <h2>Real-Time Chat Application</h2>
+    <input id="username" placeholder="Enter your name">
+    <br><br>
+    <input id="message" placeholder="Type a message">
+    <button onclick="sendMessage()">Send</button>
+
+    <ul id="messages"></ul>
+
+    <script>
+        var socket = io();
+
+        socket.on('message', function(msg){
+            var li = document.createElement("li");
+            li.textContent = msg;
+            document.getElementById("messages").appendChild(li);
+        });
+
+        function sendMessage(){
+            var user = document.getElementById("username").value;
+            var message = document.getElementById("message").value;
+            socket.send(user + ": " + message);
+            document.getElementById("message").value = "";
+        }
+    </script>
+</body>
+</html>
