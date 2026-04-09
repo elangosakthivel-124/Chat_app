@@ -11,7 +11,7 @@ def index():
 
 @socketio.on('message')
 def handle_message(msg):
-    print("Message:", msg)
+    print(f"Message received: {msg}")
     send(msg, broadcast=True)
 
 if __name__ == '__main__':
